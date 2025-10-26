@@ -11,7 +11,8 @@
   <header class="site-header small">
     <div class="brand">
       <div class="logo-wrap small">
-        <img id="site-logo-m" src="https://i.imgur.com/e40IkRK.jpeg" alt="FLICK® logo">
+        <!-- small text-logo instead of image -->
+        <div class="logo-text-mini" aria-hidden="true">FLICK<span class="reg">®</span></div>
       </div>
       <div class="brand-text">
         <div class="title">FLICK<span class="reg">®</span></div>
@@ -35,6 +36,17 @@
             <button id="flickIt" class="btn flickit">Flick it</button>
           </div>
         </div>
+      </div>
+
+      <div class="player-right">
+        <video id="movie-video" controls playsinline preload="metadata" poster="" style="width:100%; border-radius:12px; box-shadow:0 18px 60px rgba(255,190,0,0.08); background:#000"></video>
+      </div>
+    </section>
+  </main>
+
+  <script src="movie.js" defer></script>
+</body>
+</html>        </div>
       </div>
 
       <div class="player-right">
