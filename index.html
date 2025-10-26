@@ -8,14 +8,14 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Main stylesheet (relative path) -->
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- ===== Welcome sign (centered cinematic intro) ===== -->
   <div class="welcome-sign" id="welcomeSign" aria-hidden="false">
-    <h1 class="flick-logo">FLICK®</h1>
+    <h1 class="flick-logo">FLICK<span class="reg">®</span></h1>
   </div>
 
   <!-- Main content (hidden until welcome completes) -->
@@ -23,7 +23,8 @@
     <header class="site-header">
       <div class="brand">
         <div class="logo-wrap">
-          <img id="site-logo" src="https://i.imgur.com/e40IkRK.jpeg" alt="FLICK® logo">
+          <!-- replaced image logo with CSS text-logo -->
+          <div class="logo-text" aria-hidden="true">FLICK<span class="reg">®</span></div>
         </div>
         <div class="brand-text">
           <div class="title">FLICK<span class="reg">®</span></div>
@@ -35,6 +36,43 @@
       </nav>
     </header>
 
+    <main>
+      <section class="now-showing">
+        <div class="now-header">
+          <h2 class="neon now-sign">Now Showing</h2>
+        </div>
+
+        <div class="grid-wrap" id="grid-wrap" aria-live="polite"></div>
+
+        <div class="writeup" id="writeup">
+          <h2>What is a FLICK® ?</h2>
+          <p>
+            FLICK® is an experimental African storytelling universe — born from a passion to merge art, culture, and artificial intelligence.
+            Short films, between one and three minutes, pull you into cinematic visuals and immersive sound.
+          </p>
+          <div class="writeup-ctas">
+            <a class="btn subscribe" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe on YouTube</a>
+          </div>
+        </div>
+
+        <hr class="sep">
+
+        <div class="coming-section">
+          <h3 class="section-title">Coming Soon</h3>
+          <div class="coming-grid" id="coming-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <small>© FLICK® 2025 — Not real life. Real life died in FLICK®</small>
+    </footer>
+  </div>
+
+  <!-- Main script -->
+  <script src="app.js" defer></script>
+</body>
+</html>
     <main>
       <section class="now-showing">
         <div class="now-header">
