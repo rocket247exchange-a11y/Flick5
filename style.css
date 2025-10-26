@@ -17,40 +17,23 @@ a{color:inherit}
 img{max-width:100%;display:block}
 
 /* ========================
-   Welcome sign (intro)
+   Logos (text-based, metallic)
    ======================== */
 
-/* Full-screen container but visually just black + the text centered */
-.welcome-sign{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:120;
-  background:transparent; /* <- NO GRADIENT overlay, pure black page behind it */
-  pointer-events:none;
-}
-
-/* big metallic sci-fi flicker (strong glitchy) */
+/* Large landing logo (kept for welcome sign) */
 .flick-logo{
   font-family: 'Orbitron', sans-serif;
   font-size:clamp(48px, 10vw, 160px);
   font-weight:700;
   letter-spacing:8px;
   text-transform:uppercase;
-
-  /* metallic fill via background-clip */
   background:linear-gradient(90deg,#ffd24d,#ffb84d 40%, #fff4b3 70%);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-
-  /* bright glow */
   text-shadow:
     0 0 8px rgba(255,210,110,0.9),
     0 0 20px rgba(255,180,40,0.45),
     0 8px 40px rgba(0,0,0,0.6);
-
   mix-blend-mode:screen;
   animation:
     flicker 3s infinite steps(1,end),
@@ -60,50 +43,83 @@ img{max-width:100%;display:block}
   filter:drop-shadow(0 10px 30px rgba(255,180,30,0.08));
 }
 
-/* Strong glitchy on/off flicker (intended) */
+/* Main (small) CSS logo used across header/cards */
+.logo-text{
+  font-family: 'Orbitron', sans-serif;
+  font-weight:700;
+  font-size:20px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:6px;
+  background:linear-gradient(90deg, rgba(255,210,110,0.06), rgba(255,200,90,0.03));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  color:var(--gold);
+  text-shadow:0 0 8px rgba(255,200,80,0.55);
+  /* subtle flicker to match main sign */
+  animation: tinyFlick 4s infinite ease-in-out;
+}
+
+/* even smaller variant for compact places */
+.logo-text-mini{
+  font-family: 'Orbitron', sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:0.6px;
+  text-transform:uppercase;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 6px;
+  border-radius:6px;
+  color:var(--gold);
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 6px rgba(255,200,80,0.5);
+  animation: tinyFlick 5s infinite ease-in-out;
+}
+
+.logo-text .reg, .logo-text-mini .reg, .flick-logo .reg { font-size:0.55em; margin-left:4px; vertical-align:super; }
+
+/* tiny flicker keyframe */
+@keyframes tinyFlick{
+  0%, 20%, 45%, 60%, 100% { opacity:1; filter:brightness(1.05); transform:translateY(0); }
+  22%, 58% { opacity:0.25; filter:brightness(0.5) saturate(0.9); transform:translateY(-1px) skewX(-0.6deg); }
+}
+
+/* strong flicker for main welcome */
 @keyframes flicker{
   0%,19%,21%,23%,25%,54%,56%,100%{opacity:1;filter:brightness(1.3)}
   20%,24%,55%{opacity:0.12;filter:brightness(0.2)}
   22%{transform:skewX(-1deg) scale(1.01)}
   26%{transform:skewX(0deg) scale(1)}
 }
-
-/* metallic sweep */
-@keyframes metallicShift{
-  0% {background-position:0% 50%}
-  50% {background-position:100% 50%}
-  100% {background-position:0% 50%}
-}
-
-/* subtle vertical jitter */
-@keyframes subtleJitter{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-1.8px)}
-  100%{transform:translateY(0)}
-}
-
-/* hide welcome (applied by JS after delay) */
-.welcome-hidden{
-  opacity:0;
-  visibility:hidden;
-  transition:opacity 0.9s ease, visibility 0.9s;
-}
+@keyframes metallicShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes subtleJitter{0%{transform:translateY(0)}50%{transform:translateY(-1.8px)}100%{transform:translateY(0)}}
 
 /* ========================
-   Main site (hidden initially)
+   Rest of styles (page layout, cards...)
+   kept same as before but included here for completeness
    ======================== */
+
+/* hide welcome (applied by JS after delay) */
+.welcome-sign{
+  position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:120;background:transparent;pointer-events:none;
+}
+.welcome-hidden{opacity:0;visibility:hidden;transition:opacity 0.9s ease, visibility 0.9s;}
 .main-hidden{opacity:0;pointer-events:none}
 .main-visible{opacity:1;pointer-events:auto;transition:opacity 0.6s ease}
 
-/* HEADER / NAV */
+/* header */
 .site-header{
   position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:12px var(--container-padding);
-  background:rgba(0,0,0,0.0); /* transparent so black remains clean */
-  backdrop-filter:none;
+  background:rgba(0,0,0,0.0);
 }
 .brand{display:flex;align-items:center;gap:12px}
 .logo-wrap{width:64px;height:64px;border-radius:8px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;padding:6px}
-.logo-wrap img{width:100%;height:100%;object-fit:cover}
+.logo-wrap.small{width:44px;height:44px;padding:4px}
 .brand-text .title{font-weight:700;letter-spacing:1px;font-size:18px}
 .brand-text .subtitle{font-size:12px;color:var(--muted);margin-top:2px}
 .top-ctas{display:flex;gap:12px;align-items:center}
@@ -111,7 +127,7 @@ img{max-width:100%;display:block}
 .btn.subscribe{background:linear-gradient(90deg,var(--gold),var(--gold-dark));color:#111;border:0;box-shadow:0 6px 20px rgba(255,190,0,0.08)}
 .btn.flickit{background:transparent;border:2px solid var(--gold);color:var(--gold);padding:10px 18px}
 
-/* main container */
+/* main */
 main{max-width:var(--max-width);margin:36px auto;padding:0 var(--container-padding)}
 .now-header{display:flex;align-items:center;gap:18px;margin-bottom:18px}
 .neon{font-size:36px;font-weight:800;color:var(--gold);position:relative;letter-spacing:3px}
@@ -150,7 +166,7 @@ main{max-width:var(--max-width);margin:36px auto;padding:0 var(--container-paddi
 .coming-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.15),rgba(0,0,0,0.6));pointer-events:none}
 .coming-overlay{position:relative;z-index:2;padding:14px;color:#fff;display:flex;gap:12px;align-items:center}
 .small-logo{width:56px;height:56px;border-radius:8px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.small-logo img{width:100%;height:100%;object-fit:cover}
+.small-logo .logo-text-mini{display:block}
 .coming-text{flex:1}
 .coming-text h4{margin:0;font-size:16px}
 .coming-text p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
