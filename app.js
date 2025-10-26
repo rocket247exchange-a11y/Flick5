@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: "lagbaja-gif", title: "LAGBAJA", plot: "A mythic adventure.", poster: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/cl9s7W1bPjPFlIvdnQLw/pub/G6rMESZT3IfnBqWaJng5.gif" }
   ];
 
-  /* Render functions */
+  /* Render Now Showing grid */
   const grid = document.getElementById('grid-wrap');
   function posterUrlSafe(url){
     const p = normalizePosterUrl(url);
@@ -98,8 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = document.createElement('article');
     card.className = 'card';
     const poster = posterUrlSafe(m.poster);
+
+    // create card-logo using text-logo (no <img>)
+    const cardLogo = `<div class="card-logo"><div class="logo-text-mini" aria-hidden="true">FLICK<span class="reg">®</span></div></div>`;
+
     card.innerHTML = `
-      <div class="card-logo"><img src="https://i.imgur.com/e40IkRK.jpeg" alt="FLICK logo"></div>
+      ${cardLogo}
       <div class="poster-wrap">
         <div class="poster-flip flipping"><img class="poster-img" src="${poster}" alt="${m.title}"></div>
       </div>
@@ -125,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
   MOVIES.forEach(m => grid.appendChild(createMovieCard(m)));
   document.querySelectorAll('.poster-flip').forEach((el,i)=> el.style.animationDelay = (i*260)+'ms');
 
-  /* Render Coming Soon */
+  /* Render Coming Soon as GIF backgrounds w/ overlay */
   const comingGrid = document.getElementById('coming-grid');
   COMING.forEach(c=>{
     const div = document.createElement('div');
@@ -133,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     div.style.backgroundImage = `url('${c.poster}')`;
     div.innerHTML = `
       <div class="coming-overlay">
-        <div class="small-logo"><img src="https://i.imgur.com/e40IkRK.jpeg" alt="FLICK logo"></div>
+        <div class="small-logo"><div class="logo-text-mini" aria-hidden="true">FLICK<span class="reg">®</span></div></div>
         <div class="coming-text"><h4>${c.title}</h4><p>${c.plot}</p></div>
         <div class="coming-actions">
           <a class="btn subscribe" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe</a>
@@ -145,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     div.querySelector('.btn.flickit').addEventListener('click',(e)=>{ e.preventDefault(); window.open('https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-','_blank'); });
   });
 
-  /* Optional gentle auto-scroll for desktop */
+  /* Optional gentle auto-scroll for desktop for visual motion */
   if(window.innerWidth > 900){
     let pos = 0;
     function floatScroll(){
