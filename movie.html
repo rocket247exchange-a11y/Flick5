@@ -10,31 +10,36 @@
 <body>
   <header class="site-header small">
     <div class="brand">
-      <div class="logo-wrap small">
-        <!-- small text-logo instead of image -->
-        <div class="logo-text-mini" aria-hidden="true">FLICK<span class="reg">®</span></div>
-      </div>
-      <div class="brand-text">
-        <div class="title">FLICK<span class="reg">®</span></div>
-      </div>
+      <div class="logo-wrap small"><div class="logo-text" aria-hidden="true">FLICK<span class="reg">®</span></div></div>
+      <div class="brand-text"><div class="title">FLICK<span class="reg">®</span></div></div>
     </div>
     <nav class="top-ctas"><a class="btn subscribe" id="subscribe-m" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe</a></nav>
   </header>
 
-  <main class="movie-landing">
-    <button id="backBtn" class="back-btn">← Back</button>
+  <main class="movie-landing container" style="padding-top:30px;">
+    <button id="backBtn" class="btn ghost" style="margin-bottom:18px">← Back</button>
 
-    <section class="player-area">
-      <div class="player-left">
-        <div class="movie-poster" id="movie-poster" aria-hidden="true"></div>
-        <div class="movie-meta">
-          <h1 id="movie-title">Movie Title</h1>
-          <div class="meta-row"><span id="movie-year"></span></div>
-          <p id="movie-plot" class="plot"></p>
-          <div class="movie-ctas">
-            <a id="yt-sub" class="btn subscribe" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe on YouTube</a>
-            <button id="flickIt" class="btn flickit">Flick it</button>
-          </div>
+    <section class="player-area" style="display:grid;grid-template-columns:1fr 420px;gap:28px;">
+      <div>
+        <video id="movie-video" controls playsinline preload="metadata" poster="" style="width:100%; border-radius:12px; box-shadow:0 18px 60px rgba(255,190,0,0.08); background:#000"></video>
+        <div id="movie-poster" style="margin-top:14px;height:220px;border-radius:12px;background-size:cover;background-position:center;"></div>
+      </div>
+
+      <aside style="min-width:320px;">
+        <h1 id="movie-title">Movie Title</h1>
+        <div class="meta-row"><span id="movie-year"></span></div>
+        <p id="movie-plot" class="plot" style="margin-top:14px"></p>
+        <div style="margin-top:18px;display:flex;gap:12px">
+          <a id="yt-sub" class="btn subscribe" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank">Subscribe</a>
+          <button id="flickIt" class="btn flickit">Flick it</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="movie.js" defer></script>
+</body>
+</html>          </div>
         </div>
       </div>
 
