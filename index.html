@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <!-- ===== Welcome sign (centered cinematic intro) ===== -->
+  <!-- Welcome sign -->
   <div class="welcome-sign" id="welcomeSign" aria-hidden="false">
     <h1 class="flick-logo">FLICK<span class="reg">®</span></h1>
   </div>
@@ -23,7 +23,6 @@
     <header class="site-header">
       <div class="brand">
         <div class="logo-wrap">
-          <!-- replaced image logo with CSS text-logo -->
           <div class="logo-text" aria-hidden="true">FLICK<span class="reg">®</span></div>
         </div>
         <div class="brand-text">
@@ -35,6 +34,50 @@
         <a class="btn subscribe" id="subscribe-global" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe on YouTube</a>
       </nav>
     </header>
+
+    <main>
+      <!-- writeup moved to top per request -->
+      <section class="hero-writeup">
+        <div class="container">
+          <h2>What is a FLICK® ?</h2>
+          <p class="lead">
+            FLICK® is an experimental African storytelling universe — born from a passion to merge art, culture, and artificial intelligence.
+            Each short film (1–3 minutes) pulls you into a dramatic blend of cinematic visuals and immersive sound.
+            Every episode tells a new story — mythical, romantic, horrifying, or beautifully strange.
+          </p>
+          <div class="writeup-ctas">
+            <a class="btn subscribe large" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe on YouTube</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="now-showing">
+        <div class="container">
+          <div class="now-header">
+            <h2 class="neon now-sign">Now Showing</h2>
+          </div>
+
+          <div class="grid-wrap" id="grid-wrap" aria-live="polite"></div>
+
+          <hr class="sep">
+
+          <div class="coming-section">
+            <h3 class="section-title">Coming Soon</h3>
+            <div class="coming-grid" id="coming-grid"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <small>© FLICK® 2025 — Not real life. Real life died in FLICK®</small>
+    </footer>
+  </div>
+
+  <!-- Main script -->
+  <script src="app.js" defer></script>
+</body>
+</html>    </header>
 
     <main>
       <section class="now-showing">
