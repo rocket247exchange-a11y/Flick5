@@ -8,7 +8,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Main stylesheet -->
+  <!-- Main stylesheet (relative path) -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,6 +35,44 @@
       </nav>
     </header>
 
+    <main>
+      <section class="now-showing">
+        <div class="now-header">
+          <h2 class="neon now-sign">Now Showing</h2>
+        </div>
+
+        <div class="grid-wrap" id="grid-wrap" aria-live="polite"></div>
+
+        <div class="writeup" id="writeup">
+          <h2>What is a FLICK® ?</h2>
+          <p>
+            FLICK® is an experimental African storytelling universe — born from a passion to merge art, culture, and artificial intelligence.
+            Short films, between one and three minutes, pull you into cinematic visuals and immersive sound.
+          </p>
+          <div class="writeup-ctas">
+            <a class="btn subscribe" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe on YouTube</a>
+          </div>
+        </div>
+
+        <hr class="sep">
+
+        <div class="coming-section">
+          <h3 class="section-title">Coming Soon</h3>
+          <div class="coming-grid" id="coming-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <small>© FLICK® 2025 — Not real life. Real life died in FLICK®</small>
+    </footer>
+  </div>
+
+  <!-- Scripts: place at end of body + use defer attribute.
+       Defer ensures parsing finishes first; the JS itself also wraps in DOMContentLoaded for extra safety. -->
+  <script src="app.js" defer></script>
+</body>
+</html>
     <main>
       <section class="now-showing">
         <div class="now-header">
