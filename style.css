@@ -8,187 +8,101 @@
   --max-width:1200px;
   --container-padding:28px;
   --brand-font: 'Inter', system-ui, Arial, sans-serif;
-  --orbit: 'Orbitron', sans-serif;
+  --orbit:'Orbitron', sans-serif;
 }
 
-/* base */
+/* Reset & base */
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background:var(--bg);color:#fff;font-family:var(--brand-font);-webkit-font-smoothing:antialiased}
+.container{max-width:var(--max-width);margin:0 auto;padding:24px var(--container-padding)}
 a{color:inherit;text-decoration:none}
-.container{max-width:var(--max-width);margin:0 auto;padding:0 var(--container-padding)}
 
-/* Welcome sign (no background overlay) */
-.welcome-sign{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:120;background:transparent;pointer-events:none}
-.flick-logo{font-family:var(--orbit);font-weight:700;font-size:clamp(48px,10vw,140px);letter-spacing:8px;text-transform:uppercase;
+/* Welcome sign */
+.welcome-sign{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:120;background:transparent;pointer-events:none}
+.flick-logo{font-family:var(--orbit);font-weight:700;font-size:clamp(64px, 10vw, 140px);letter-spacing:8px;text-transform:uppercase;
   background:linear-gradient(90deg,#ffd24d,#ffb84d 40%, #fff4b3 70%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  text-shadow:0 0 8px rgba(255,210,110,0.9),0 0 20px rgba(255,180,40,0.45);
-  animation:flicker 3s infinite steps(1,end),metallicShift 5s linear infinite;
+  text-shadow:0 0 8px rgba(255,210,110,0.9),0 12px 40px rgba(255,160,40,0.06);
+  animation:flicker 3s infinite steps(1,end),metalShift 6s linear infinite;
 }
+.flick-logo .reg{font-size:.45em;margin-left:6px;vertical-align:super}
 @keyframes flicker{0%,19%,21%,23%,25%,54%,56%,100%{opacity:1}20%,24%,55%{opacity:0.12}}
-@keyframes metallicShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes metalShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .welcome-hidden{opacity:0;visibility:hidden;transition:opacity .9s,visibility .9s}
+.main-hidden{opacity:0;pointer-events:none}
+.main-visible{opacity:1;pointer-events:auto;transition:opacity .6s}
 
-/* header */
-.site-header{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:12px var(--container-padding);background:transparent}
+/* Header */
+.site-header{display:flex;align-items:center;justify-content:space-between;padding:18px var(--container-padding);background:transparent;position:sticky;top:0;z-index:50}
 .brand{display:flex;align-items:center;gap:12px}
-.logo-wrap{display:flex;align-items:center}
-.logo-text{font-family:var(--orbit);font-weight:700;font-size:18px;color:var(--gold);text-shadow:0 4px 18px rgba(255,180,40,0.06)}
-.brand-text .title{font-weight:700}
-.brand-text .subtitle{font-size:12px;color:var(--muted)}
+.logo-text{font-family:var(--orbit);font-weight:800;font-size:18px;color:var(--gold);text-shadow:0 6px 18px rgba(255,180,40,0.06)}
+.brand-meta .brand-title{font-weight:700}
+.brand-meta .brand-sub{font-size:12px;color:var(--muted)}
 
-/* buttons - fancy gradients */
+/* Buttons */
 .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;font-weight:700;cursor:pointer;border:none}
-.btn.subscribe{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#0b0b0b;box-shadow:0 8px 30px rgba(255,180,40,0.12),0 2px 8px rgba(0,0,0,0.6);transform:translateZ(0)}
+.btn.subscribe{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#050505;box-shadow:0 10px 40px rgba(255,170,30,0.08)}
 .btn.subscribe.large{padding:14px 22px;font-size:16px}
-.btn.subscribe:hover{transform:translateY(-4px);box-shadow:0 18px 60px rgba(255,180,40,0.14)}
-.btn.flickit{background:linear-gradient(90deg, rgba(255,210,100,0.08), rgba(255,210,100,0.02));border:1px solid rgba(255,210,100,0.18);color:var(--gold)}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+.btn.flickit{background:linear-gradient(90deg, rgba(255,210,90,0.08), rgba(255,210,90,0.02));border:1px solid rgba(255,210,90,0.18);color:var(--gold)}
 
-/* writeup hero */
-.hero-writeup{padding:44px 0 28px}
-.hero-writeup h2{margin:0 0 10px;font-size:20px}
-.lead{color:var(--muted);max-width:980px;line-height:1.6;margin-bottom:12px}
+/* Hero writeup */
+.hero{padding:10px 0 30px;text-align:center}
+.hero-title{margin:0;font-size:22px}
+.hero-lead{color:var(--muted);max-width:960px;margin:12px auto 14px;line-height:1.6}
+.hero-cta{margin-top:8px}
 
-/* now showing header */
-.now-header{display:flex;align-items:center;gap:18px;margin-bottom:14px}
-.neon{font-size:36px;font-weight:800;color:var(--gold);position:relative;letter-spacing:3px}
-.neon::after{content:'';position:absolute;inset:0 -3px;filter:blur(8px);opacity:0.28;background:linear-gradient(90deg,var(--gold),#ffecb3);z-index:-1;border-radius:6px;mix-blend-mode:screen}
+/* Now showing header */
+.now-header{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+.neon{font-size:36px;font-weight:800;color:var(--gold)}
+.neon::after{content:'';position:absolute;filter:blur(10px);opacity:0.28;background:linear-gradient(90deg,var(--gold),#ffecb3);z-index:-1;border-radius:6px}
 .now-sign{animation:neonFlick 3s infinite steps(1,end)}
-@keyframes neonFlick{0%{opacity:1}8%{opacity:0.22}12%{opacity:1}18%{opacity:0.15}20%{opacity:1}62%{opacity:0.22}64%{opacity:1}}
+@keyframes neonFlick{0%{opacity:1}8%{opacity:0.2}12%{opacity:1}18%{opacity:0.15}20%{opacity:1}62%{opacity:0.2}64%{opacity:1}}
 
-/* grid layout */
+/* Grid */
 .grid-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--gap)}
-.card{position:relative;border-radius:12px;overflow:visible;background:transparent;padding:0;min-height:220px;transition:transform .28s ease}
-.card-inner{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
-.poster-wrap{position:relative;border-radius:12px;overflow:hidden;background:#000;height:0;padding-bottom:56.25%} /* 16:9 ratio */
-.poster-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform-origin:center;transition:transform .8s cubic-bezier(.2,.9,.12,1)}
+.card{position:relative;border-radius:var(--card-radius);overflow:visible;transition:transform .28s ease}
+.card-inner{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:0;border-radius:var(--card-radius);border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 28px rgba(0,0,0,0.6)}
+.poster-wrap{position:relative;border-radius:10px;overflow:hidden;background:#000;height:0;padding-bottom:56.25%}
+.poster-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.9,.12,1)}
 .poster-flip{position:absolute;inset:0;transform-origin:center}
 .poster-flip.flipping{animation:flipLoop 6s linear infinite}
 @keyframes flipLoop{0%{transform:rotateY(0)}25%{transform:rotateY(180deg)}26%{transform:rotateY(180deg)}51%{transform:rotateY(360deg)}100%{transform:rotateY(360deg)}}
 
-/* logo directly on poster (no square) */
-.poster-logo{position:absolute;left:12px;top:12px;font-family:var(--orbit);font-weight:800;color:var(--gold);font-size:14px;letter-spacing:1px;padding:2px 6px;border-radius:6px;background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.1));mix-blend-mode:screen;z-index:6;pointer-events:none; text-transform:uppercase;}
+/* Logo placed directly on poster (no square) */
+.poster-logo{position:absolute;left:12px;top:12px;font-family:var(--orbit);font-weight:800;color:var(--gold);font-size:14px;letter-spacing:0.6px;padding:4px 8px;border-radius:6px;background:linear-gradient(90deg, rgba(0,0,0,0.22), rgba(0,0,0,0.06));z-index:6;pointer-events:none;text-transform:uppercase}
 
-/* play button (over poster) */
+/* Play button overlay */
 .play-overlay{position:absolute;right:12px;bottom:12px;z-index:6}
-.play-btn{width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--gold),var(--gold-dark));border:none;box-shadow:0 10px 30px rgba(255,180,40,0.12);cursor:pointer;transform:translateZ(0)}
+.play-btn{width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--gold),var(--gold-dark));border:none;box-shadow:0 10px 30px rgba(255,180,40,0.12);cursor:pointer}
 .play-btn svg{width:22px;height:22px;fill:#0b0b0b}
 
-/* card text area */
-.card-body{padding:10px 6px 12px}
+/* Card body */
+.card-body{padding:12px}
 .card h3{margin:0;font-size:16px}
 .meta-row{font-size:12px;color:var(--muted);margin-top:6px}
-.plot{margin-top:8px;color:var(--muted);font-size:13px;min-height:46px}
+.plot{margin-top:8px;color:var(--muted);font-size:14px;min-height:46px}
+
+/* coming soon */
+.sep{height:1px;background:rgba(255,255,255,0.04);border:0;margin:28px 0}
+.coming-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:12px}
+.coming-card{position:relative;border-radius:12px;overflow:hidden;min-height:180px;background-size:cover;background-position:center;display:flex;align-items:flex-end;box-shadow:0 10px 40px rgba(255,180,40,0.05)}
+.coming-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.6));z-index:0}
+.coming-overlay{position:relative;z-index:2;padding:16px;color:#fff;display:flex;gap:12px;align-items:center}
+.small-title{font-weight:800;margin:0}
+
+/* footer */
+.site-footer{padding:24px;text-align:center;color:var(--muted);font-size:13px}
 
 /* hover effects */
-.card:hover .poster-img{transform:scale(1.03)}
 .card:hover{transform:translateY(-8px)}
+.card:hover .poster-img{transform:scale(1.03)}
 
-/* coming soon area updated - only origin card */
-.coming-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:12px}
-.coming-card{position:relative;border-radius:12px;overflow:hidden;min-height:200px;background-size:cover;background-position:center;display:flex;align-items:flex-end}
-.coming-card::before{content:'';position:absolute;inset:-20px;background:radial-gradient(circle at center, rgba(255,200,60,0.06), transparent 32%);filter:blur(30px);z-index:0}
-.coming-overlay{position:relative;z-index:2;padding:18px;color:#fff;display:flex;align-items:center;gap:14px}
-.small-title{font-weight:800;font-size:18px;margin:0}
-.coming-card .logo-text-mini{position:static;box-shadow:none}
-
-/* misc */
-.sep{height:1px;background:rgba(255,255,255,0.04);border:0;margin:28px 0}
-.site-footer{padding:22px 0;text-align:center;color:var(--muted);font-size:13px}
-
-/* responsive tweaks */
-@media(max-width:900px){
+/* responsive */
+@media(max-width:880px){
   .grid-wrap{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-  .poster-logo{left:8px;top:8px;font-size:12px}
   .play-btn{width:48px;height:48px}
-             }  mix-blend-mode:screen;
-  animation:
-    flicker 3s infinite steps(1,end),
-    metallicShift 5s infinite linear,
-    subtleJitter 6s infinite;
-  transform-origin:center;
-  filter:drop-shadow(0 10px 30px rgba(255,180,30,0.08));
-}
-
-/* Main (small) CSS logo used across header/cards */
-.logo-text{
-  font-family: 'Orbitron', sans-serif;
-  font-weight:700;
-  font-size:20px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:6px;
-  background:linear-gradient(90deg, rgba(255,210,110,0.06), rgba(255,200,90,0.03));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  color:var(--gold);
-  text-shadow:0 0 8px rgba(255,200,80,0.55);
-  /* subtle flicker to match main sign */
-  animation: tinyFlick 4s infinite ease-in-out;
-}
-
-/* even smaller variant for compact places */
-.logo-text-mini{
-  font-family: 'Orbitron', sans-serif;
-  font-weight:700;
-  font-size:14px;
-  letter-spacing:0.6px;
-  text-transform:uppercase;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:4px 6px;
-  border-radius:6px;
-  color:var(--gold);
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 6px rgba(255,200,80,0.5);
-  animation: tinyFlick 5s infinite ease-in-out;
-}
-
-.logo-text .reg, .logo-text-mini .reg, .flick-logo .reg { font-size:0.55em; margin-left:4px; vertical-align:super; }
-
-/* tiny flicker keyframe */
-@keyframes tinyFlick{
-  0%, 20%, 45%, 60%, 100% { opacity:1; filter:brightness(1.05); transform:translateY(0); }
-  22%, 58% { opacity:0.25; filter:brightness(0.5) saturate(0.9); transform:translateY(-1px) skewX(-0.6deg); }
-}
-
-/* strong flicker for main welcome */
-@keyframes flicker{
-  0%,19%,21%,23%,25%,54%,56%,100%{opacity:1;filter:brightness(1.3)}
-  20%,24%,55%{opacity:0.12;filter:brightness(0.2)}
-  22%{transform:skewX(-1deg) scale(1.01)}
-  26%{transform:skewX(0deg) scale(1)}
-}
-@keyframes metallicShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@keyframes subtleJitter{0%{transform:translateY(0)}50%{transform:translateY(-1.8px)}100%{transform:translateY(0)}}
-
-/* ========================
-   Rest of styles (page layout, cards...)
-   kept same as before but included here for completeness
-   ======================== */
-
-/* hide welcome (applied by JS after delay) */
-.welcome-sign{
-  position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:120;background:transparent;pointer-events:none;
-}
-.welcome-hidden{opacity:0;visibility:hidden;transition:opacity 0.9s ease, visibility 0.9s;}
-.main-hidden{opacity:0;pointer-events:none}
-.main-visible{opacity:1;pointer-events:auto;transition:opacity 0.6s ease}
-
-/* header */
-.site-header{
-  position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:12px var(--container-padding);
-  background:rgba(0,0,0,0.0);
-}
-.brand{display:flex;align-items:center;gap:12px}
-.logo-wrap{width:64px;height:64px;border-radius:8px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;padding:6px}
-.logo-wrap.small{width:44px;height:44px;padding:4px}
-.brand-text .title{font-weight:700;letter-spacing:1px;font-size:18px}
+  .poster-logo{font-size:12px;left:8px;top:8px}
+}t-size:18px}
 .brand-text .subtitle{font-size:12px;color:var(--muted);margin-top:2px}
 .top-ctas{display:flex;gap:12px;align-items:center}
 .btn{display:inline-block;padding:10px 16px;border-radius:999px;font-weight:600;background:transparent;border:1px solid rgba(255,255,255,0.06);cursor:pointer;color:#fff}
