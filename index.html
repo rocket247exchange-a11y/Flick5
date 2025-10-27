@@ -5,17 +5,28 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FLICK® — Now Showing</title>
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet (place style.css in same folder) -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <!-- Welcome sign (CSS-only) -->
+  <!-- ===============================
+       Welcome sign (CSS-only)
+       Visible on page load. JS will hide it and reveal main content.
+       ================================ -->
   <div class="welcome-sign" id="welcomeSign" aria-hidden="false">
     <div class="flick-logo">FLICK<span class="reg">®</span></div>
   </div>
 
-  <!-- Main content (hidden until revealed) -->
+  <!-- ===============================
+       Main content (hidden until welcome sign is dismissed)
+       ================================ -->
   <div id="mainContent" class="main-hidden" aria-hidden="true">
+
+    <!-- Header -->
     <header class="site-header">
       <div class="brand">
         <div class="logo-text" aria-hidden="true">FLICK<span class="reg">®</span></div>
@@ -24,17 +35,104 @@
           <div class="brand-sub">Don’t Just Watch it, Flick it.</div>
         </div>
       </div>
+
       <nav class="top-ctas">
         <a class="btn subscribe" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe</a>
       </nav>
     </header>
 
+    <!-- Page container -->
     <main class="container">
-      <!-- Writeup at top -->
+
+      <!-- HERO / WRITEUP (top) -->
       <section class="hero">
         <h1 class="hero-title">What is a FLICK® ?</h1>
         <p class="hero-lead">
           FLICK® is an experimental African storytelling universe — short cinematic films (1–3 minutes) that merge art, culture and AI.
+          Each episode is a standalone cinematic experience: mythical, horrifying, romantic, or beautifully strange. In FLICK®, nothing is ordinary.
+        </p>
+        <div class="hero-cta">
+          <a class="btn subscribe large" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank" rel="noopener">Subscribe on YouTube</a>
+        </div>
+      </section>
+
+      <!-- NOW SHOWING -->
+      <section class="now-showing">
+        <div class="now-header">
+          <h2 class="neon now-sign">Now Showing</h2>
+        </div>
+
+        <!-- Grid of current films (rendered by app.js) -->
+        <div id="grid-wrap" class="grid-wrap" aria-live="polite" role="list"></div>
+
+        <hr class="sep">
+
+        <!-- ON FLICK® — large rectangular GIF covers with overlay text/buttons -->
+        <section id="on-flick" class="on-flick-section">
+          <h3 class="section-title">On FLICK®</h3>
+          <div id="on-flick-grid" class="on-flick-grid" role="list"></div>
+        </section>
+
+        <hr class="sep">
+
+        <!-- COMING SOON -->
+        <div class="coming-section">
+          <h3 class="section-title">Coming Soon</h3>
+          <div id="coming-grid" class="coming-grid" role="list"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <small>© FLICK® 2025 — Not real life. Real life died in FLICK®</small>
+    </footer>
+  </div>
+
+  <!-- ===============================
+       Minimal inline fallback reveal
+       Ensures the page becomes visible even if app.js fails to run.
+       ================================ -->
+  <script>
+    (function(){
+      const welcome = document.getElementById('welcomeSign');
+      const main = document.getElementById('mainContent');
+
+      function reveal() {
+        if(!main) return;
+        welcome.classList.add('welcome-hidden');
+        welcome.setAttribute('aria-hidden','true');
+        main.classList.remove('main-hidden');
+        main.classList.add('main-visible');
+        main.setAttribute('aria-hidden','false');
+      }
+
+      // Reveal after DOM ready or 1s whichever comes first
+      let done = false;
+      document.addEventListener('DOMContentLoaded', () => { if(!done){ done = true; setTimeout(reveal, 300); } });
+      setTimeout(() => { if(!done){ done = true; reveal(); } }, 1000);
+
+      // Dev/test shortcut: press 'v' to reveal
+      document.addEventListener('keydown', (e) => { if(e.key === 'v') reveal(); });
+    })();
+  </script>
+
+  <!-- Main interactive script (deferred) - place app.js in same folder -->
+  <script src="app.js" defer></script>
+
+  <!-- If JS disabled, show content plainly -->
+  <noscript>
+    <style>
+      .welcome-sign { display:none !important; }
+      .main-hidden { display:block !important; opacity:1 !important; pointer-events:auto !important; }
+    </style>
+    <div style="padding:20px;color:#fff;background:#000;text-align:center;">
+      JavaScript is required for full experience. Please enable JavaScript or open this site in a modern browser.
+    </div>
+  </noscript>
+</body>
+</html>          FLICK® is an experimental African storytelling universe — short cinematic films (1–3 minutes) that merge art, culture and AI.
           Each episode is a standalone cinematic experience: mythic, horrifying, romantic, or beautifully strange.
         </p>
         <div class="hero-cta">
