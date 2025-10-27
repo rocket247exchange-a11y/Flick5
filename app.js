@@ -460,5 +460,64 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 900);
     }, 4000);
   })();
+// ---------- On FLICK® section data (add your links here) ----------
+const ON_FLICK = [
+  // Example item — replace the cover/video with your actual links
+  {
+    id: "kalakuta-2-onflick",
+    title: "KALAKUTA 2",
+    plot: "KUTI faces tragedy and must rise up again to free the people of KALAKUTA.",
+    cover: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/....gif", // <-- replace with your cover (direct link)
+    video: "https://www.dropbox.com/s/XXXXX/kalakuta2.mp4?raw=1" // <-- optional: link to video (dl=1/raw=1 recommended)
+  },
+
+  // add more items here, e.g.
+  // { id: "vengance-onflick", title: "VENGEANCE OF ABIYOYO", plot: "...", cover: "https://i.imgur.com/xxx.gif", video: "..." }
+];
+
+// Render On FLICK® grid
+const onFlickGrid = document.getElementById('on-flick-grid');
+if(onFlickGrid){
+  onFlickGrid.innerHTML = ''; // clear
+  ON_FLICK.forEach(item => {
+    const card = document.createElement('a'); // anchor so entire card can link to movie or open video
+    card.className = 'on-flick-card';
+    // set background to cover (safe fallback to placeholder)
+    const coverUrl = item.cover || '';
+    card.style.backgroundImage = `url("${coverUrl}")`;
+
+    // fallback if image blocked: we will add an <img> preloader and set background if success
+    const preImg = new Image();
+    preImg.onload = () => { /* already set as background */ };
+    preImg.onerror = () => {
+      // If background fails, fallback to placeholder background (svg dataURI)
+      card.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720"><rect width="100%" height="100%" fill="%23000"/><text x="50%" y="50%" fill="%23fff" font-size="28" font-family="Arial" text-anchor="middle">Cover unavailable</text></svg>')`;
+    };
+    try { preImg.src = coverUrl; } catch(e){ /* ignore */ }
+
+    // clickable behavior: open movie detail page if id matches a MOVIES entry otherwise open video
+    let hrefTarget = '#';
+    const movieMatch = MOVIES.find(m=>m.id === (item.id || '').replace(/-onflick$/,''));
+    if(movieMatch) hrefTarget = `movie.html?id=${encodeURIComponent(movieMatch.id)}`;
+    else if(item.video) hrefTarget = item.video;
+
+    card.href = hrefTarget;
+    card.target = "_blank";
+
+    // overlay content (logo, title, plot, buttons)
+    card.innerHTML = `
+      <div class="on-flick-overlay">
+        <div class="on-flick-logo">FLICK<span class="reg">®</span></div>
+        <h4 class="on-flick-title">${item.title}</h4>
+        <p class="on-flick-plot">${item.plot}</p>
+        <div class="on-flick-actions">
+          <a class="btn subscribe" href="https://youtube.com/@kezithelastcreator?si=AIUm9DMrV8DnBxw-" target="_blank">Subscribe</a>
+          <a class="btn flickit" href="${hrefTarget}" target="_blank">Flick it</a>
+        </div>
+      </div>
+    `;
+    onFlickGrid.appendChild(card);
+  });
+}
 
 }); // end DOMContentLoaded
