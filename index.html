@@ -509,4 +509,97 @@
   <!-- Main script -->
   <script src="app.js" defer></script>
 </body>
+<div class="page">
+  <h3 style="margin-bottom:12px;color:#fff">On FLICK®</h3>
+  <div id="onFlickGrid" class="onFlickGrid"></div>
+</div>
+
+<style>
+.onFlickGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+  gap:20px;
+}
+.onFlickCard{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 0 40px 6px rgba(255,210,60,0.4);
+  transition:transform 0.35s ease, box-shadow 0.35s ease;
+  cursor:pointer;
+}
+.onFlickCard:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 0 60px 12px rgba(255,210,60,0.5);
+}
+.onFlickCard img{
+  width:100%;
+  display:block;
+  border-radius:12px;
+}
+.onFlickCard .cardOverlay{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  background:linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
+  padding:14px;
+  color:#fff;
+}
+.onFlickCard .title{
+  font-weight:800;
+  font-size:1.1rem;
+  font-family:'Orbitron', sans-serif;
+}
+.onFlickCard .plot{
+  font-size:0.9rem;
+  margin-top:4px;
+  color:rgba(255,255,255,0.85);
+}
+.onFlickCard .btns{
+  margin-top:8px;
+  display:flex;
+  gap:8px;
+}
+.btnFlick{
+  background:linear-gradient(90deg,#FFD24D,#CFA331);
+  border:none;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+  color:#050505;
+}
+</style>
+
+<script>
+const MOVIES_SECTION = [
+  {title:"KALAKUTA 1", plot:"A man rises against injustice in an alternate Nigeria.", poster:"https://i.imgur.com/D52jiod.jpeg", video:"#"},
+  {title:"MADAM CASH", plot:"Madam Cash — an overly wealthy philanthropist with a dark secret.", poster:"https://i.imgur.com/CsIqbCb.jpeg", video:"#"},
+  {title:"KALAKUTA 2", plot:"KUTI must rise up again after tragedy to free the people.", poster:"https://i.imgur.com/L3JD8LM.png", video:"#"},
+  {title:"LAGBAJA", plot:"A dive into the hidden tribe of the ERU people — myth meets danger.", poster:"https://i.imgur.com/lttZJ9y.jpeg", video:"#"},
+  {title:"VENGEANCE OF ABIYOYO", plot:"In a wasteland alternate Abuja city, a demon terrorises the people.", poster:"https://i.imgur.com/Ap6CYaN.jpeg", video:"#"}
+];
+
+const grid = document.getElementById('onFlickGrid');
+MOVIES_SECTION.forEach(movie => {
+  const card = document.createElement('div');
+  card.className = 'onFlickCard';
+  card.innerHTML = `
+    <img src="${movie.poster}" alt="${movie.title} poster"/>
+    <div class="cardOverlay">
+      <div class="title">${movie.title}</div>
+      <div class="plot">${movie.plot}</div>
+      <div class="btns">
+        <button class="btnFlick" data-video="${movie.video}">Flick it</button>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+
+  card.querySelector('.btnFlick').addEventListener('click', e => {
+    const vid = e.target.getAttribute('data-video');
+    alert('Here you can open video: ' + vid); // Replace this with modal player later
+  });
+});
+</script>
     </html>
